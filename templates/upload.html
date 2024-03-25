@@ -1,0 +1,37 @@
+{% load bootstrap4 %}
+{% include "index.html" %}
+{% block start %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+    <div class="container">
+        <form id="uploadForm" class="container mt-5" method="post" enctype="multipart/form-data">
+            <h1>Upload Data</h1>
+            {% csrf_token %}
+            <input type="file" name="file" class="file-input">
+            <button style="height: 30px;margin-left: 224px;/*! margin: 35px; */margin-bottom: 6px;margin-top: -26px;" type="submit" class="btn btn-success">Start Upload</button>
+            <div>
+                <label>Upload Progress</label>
+                <progress id="progressBar" value="0" max="100"></progress>
+            </div>
+        </form>
+    </div>
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', this.action, true);
+            xhr.upload.onprogress = function(e) {
+                if (e.lengthComputable) {
+                    var percentComplete = (e.loaded / e.total) * 100;
+                    document.getElementById('progressBar').value = percentComplete;
+                    document.getElementById('status').innerHTML = percentComplete + '% uploaded';
+                }
+            };
+            xhr.send(formData);
+        });
+    </script>
+{% endblock %}

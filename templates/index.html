@@ -1,0 +1,18 @@
+<!--<!DOCTYPE html>-->
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    {% block start %}
+        <a href="/upload/">Upload</a>
+        <a href="/builder/">Query Builder</a>
+        <a href="/user/">User</a>
+        <a style="text-align-last:end" href="/accounts/logout/">Logout</a>
+    {% endblock %}
+</body>
+</html>

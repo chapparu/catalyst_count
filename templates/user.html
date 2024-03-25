@@ -1,0 +1,47 @@
+{% load bootstrap4 %}
+{% include "index.html" %}
+{% block start %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+    <h1>Users</h1>
+    {% if request.session.message == 'New user added' %}
+    <div id="message" class="alert alert-success">
+        <label>{{request.session.message}}</label>
+    </div>
+    {% endif %}
+    <a href="/add/">
+        <button type="submit" class="btn btn-primary">Add User</button>
+    </a>
+    <table class="table">
+<!--      <thead>-->
+<!--        <tr>-->
+<!--          <th scope="col">Name</th>-->
+<!--          <th scope="col"></th>-->
+<!--          <th scope="col">Last</th>-->
+<!--          <th scope="col">Handle</th>-->
+<!--        </tr>-->
+<!--      </thead>-->
+      <tbody>
+      {% for i in users %}
+        <tr id="row{{ i.id }}">
+          <th>{{i.name}}</th>
+          <td>{{i.email}}</td>
+          {% if i.is_active %}
+          <td>Active</td>
+          {% endif %}
+<!--          <td><a href="/delete/{{i.id}}"><button class="delete-btn" type="submit" data-id="{{ i.id }}">Delete</button></a></td>-->
+            <td><a href="/delete/{{i.id}}" class="btn btn-danger">Delete</a></td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+<script>
+var messageElement = document.getElementById('message');
+setTimeout(function() {
+    messageElement.style.display = 'none';
+}, 8000); // Adjust the time delay as needed
+</script>
+{% endblock %}

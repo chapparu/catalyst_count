@@ -1,0 +1,86 @@
+{% load bootstrap4 %}
+{% include "index.html" %}
+{% block start %}
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+    <div style="contaier">
+        <div id="message" class="alert alert-success" style="display: {% if count == none %}none{% endif %}">
+            <strong>Success! </strong><label>{{count}} records found for query</label>
+        </div>
+<!--        <label style="background-color:#28a745 ;display: {% if count == none %}none{% endif %}">{{count}} records found for query</label>-->
+        <form  action="/add_query/" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" class="form-control" id="exampleInput1" aria-describedby="inputHelp"
+                       name="keyword" placeholder="Keyword">
+            </div>
+            <div class="mb-3">
+              <select id="industry" name="industry">
+                <option value="">Select a Industry</option>
+                {% for item in company %}
+                    <option value="{{ item.id }}">{{ item.industry }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <select id="year" name="year_founded">
+                <option value="">Year Founded</option>
+                {% for item in company %}
+                    <option value="{{ item.year_founded }}">{{ item.year_founded }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <select id="city" name="city">
+                <option value="">City</option>
+                {% for item in company %}
+                    <option value="{{ item.city }}">{{ item.city }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <select id="state" name="state">
+                <option value="">State</option>
+                {% for item in company %}
+                    <option value="{{ item.state }}">{{ item.state }}</option>
+                {% endfor %}
+              </select>
+            </div>
+            <div class="mb-3">
+              <select id="country" name="country">
+                <option value="">Country</option>
+                {% for item in company %}
+                    <option value="{{ item.country }}">{{ item.country }}</option>
+                {% endfor %}3
+              </select>
+            </div>
+            <div class="mb-3">
+              <select id="from" name="total_emp">
+                <option value="">Employee(from)</option>
+                {% for item in company %}
+                    <option value="{{ item.total_emp }}">{{ item.total_emp }}</option>
+                {% endfor %}3
+              </select>
+            </div>
+            <div class="mb-3">
+              <select id="current_emp" name="current_emp">
+                <option value="">Employee(to)</option>
+                {% for item in company %}
+                    <option value="{{ item.current_emp }}">{{ item.current_emp }}</option>
+                {% endfor %}3
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Query Data</button>
+            <button type="reset" class="btn btn">Reset</button>
+        </form>
+    </div>
+<script>
+var messageElement = document.getElementById('message');
+setTimeout(function() {
+    messageElement.style.display = 'none';
+}, 10000); // Adjust the time delay as needed
+</script>
+{% endblock %}
