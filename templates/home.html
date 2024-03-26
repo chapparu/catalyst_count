@@ -13,7 +13,7 @@
   <div class="container mt-5" style="border: 5px solid;margin: auto;width: 50%;padding: 10px;">
     <!-- Content goes here -->
       {% if user.is_authenticated%}
-        <h1 style="text-align: center;">Thank you !, {{user.username}}</h1>
+        <h1 style="text-align: center;">Thank you ! {{user.username}}</h1>
         <div style="text-align: center;">
           <a href="/accounts/logout/"><button class="btn btn-primary">Bye!!</button></a>
         </div>
