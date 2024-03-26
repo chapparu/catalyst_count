@@ -1,4 +1,5 @@
-{% load bootstrap4 %}
+{% include "index.html" %}
+{% block start %}
 <html>
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -7,13 +8,16 @@
     <title>Add User</title>
 </head>
 <body>
-    <h1>Add User</h1>
-    <div style="contaier mt-5">
+<!--    <h1>Add User</h1>-->
+    <div lass="container mt-5" style="border: 5px solid;margin: auto;width: 50%;padding: 10px;margin-top: 10px;">
+        <h1 style="text-align: center;background-color: #879CEB;margin-top: -10px;">Add User</h1>
         <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Add</button>
-    </form>
+        </form>
     </div>
 </body>
 </html>
+{% endblock %}
+
